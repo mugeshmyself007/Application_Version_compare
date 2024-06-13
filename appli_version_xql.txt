@@ -1,0 +1,7 @@
+config case_sensitive = false 
+| preset = host_inventory_applications 
+| filter application_name = "*chrome*"  //select any one application name Ex: Chrome
+| alter Version_Decription = if(version < "125.0.6422.141" , "This is lower version of '125.0.6422.141'" , "This is not lower version") // Google Chrome versions prior to ('125.0.6422.141').
+| dedup endpoint_name
+| filter version_ not contains  "This is not lower version"
+| fields application_name , version_,  endpoint_name , version , raw_version , *
